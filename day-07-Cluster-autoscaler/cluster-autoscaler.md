@@ -10,25 +10,28 @@ Apply the official Cluster Autoscaler manifest for your Kubernetes version (adju
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/cluster-autoscaler-1.29.0/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+```
 2️⃣ Verify the Pod
 Check that the autoscaler pod is running in the kube-system namespace:
-
-
+```sh
 kubectl -n kube-system get pods -l app=cluster-autoscaler
+```
 Expected output:
-
-
+```sh
 NAME                                  READY   STATUS    RESTARTS   AGE
 cluster-autoscaler-6889f6cf54-7pcsh   1/1     Running   0          2m
-3️⃣ Edit Deployment (Add Cluster Name)
-Edit the deployment to configure your cluster name:
+```
 
+3️⃣ Edit Deployment (Add Cluster Name)
+
+Edit the deployment to configure your cluster name:
 
 kubectl -n kube-system edit deployment.apps/cluster-autoscaler
 Inside the manifest, find the container args section and update:
 
 yaml
 Copy code
+```sh
 containers:
   - name: cluster-autoscaler
     - command:
@@ -42,6 +45,7 @@ containers:
         image: registry.k8s.io/autoscaling/cluster-autoscaler:v1.26.2
         imagePullPolicy: Always
         name: cluster-autoscaler
+```
 Save & exit.
 
 4️⃣ Configure IAM Permissions
@@ -53,7 +57,7 @@ or create a custom IAM policy with the JSON below.
 
 Example IAM Policy JSON
 
-
+```sh
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -72,38 +76,41 @@ Example IAM Policy JSON
     }
   ]
 }
+```
+
 Attach this to your Node Group Role.
 
 5️⃣ Update Node Group Scaling Config
 Set your min/max/desired node counts for the autoscaler:
-
+```sh
 aws eks update-nodegroup-config \
   --cluster-name naresh \
   --nodegroup-name ng-af5ac006 \
   --scaling-config minSize=2,maxSize=6,desiredSize=3
+```
 6️⃣ Check Autoscaler Logs
 Watch the logs to confirm the autoscaler is working:
-
-
+```sh
 kubectl -n kube-system logs -f deployment/cluster-autoscaler
+```
 Look for lines like:
-
-
+```sh
 I0828 17:36:38.403432       1 scale_up.go:422] Pod default/nginx-deployment-12345 is unschedulable ...
 I0828 17:36:38.403451       1 scale_up.go:423] Scale-up triggered ...
+```
 ✅ Validation
 Deploy a test workload with more pods than your current node capacity:
-
-
+```sh
 kubectl create deployment nginx --image=nginx --replicas=50
+```
 Check if new nodes are being added:
-
-
+```sh
 kubectl get nodes -w
+```
 Scale down pods and watch nodes reduce (if below maxSize and above minSize):
-
-
+```sh
 kubectl scale deployment nginx --replicas=1
+```
 📝 Notes
 minSize ensures at least 2 nodes are always running.
 
