@@ -45,12 +45,10 @@ You can follow same procedure in the official  AWS document [Getting started wit
    --zones <AZ-1>,<AZ-2>
    
    example:
-   My-EKS-cluster - t2.small
    eksctl create cluster --name my-eks-cluster \
    --region us-east-1 \
    --node-type t2.small \
    
-    My-EKS - t2.medium
  ```sh
    eksctl create cluster --name my-eks  \
    --region us-east-1 \
