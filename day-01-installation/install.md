@@ -45,16 +45,16 @@ You can follow same procedure in the official  AWS document [Getting started wit
    --zones <AZ-1>,<AZ-2>
    
    example:
-   eksctl create cluster --name naresh \
+   eksctl create cluster --name my-eks-cluster \
       --region us-east-1 \
    --node-type t2.small \
 
  ```sh
-   eksctl create cluster --name naresh  \
+   eksctl create cluster --name my-eks  \
    --region us-east-1 \
    --node-type t2.medium \
    --nodes-min 2 \
-   --nodes-max 6
+   --nodes-max 4
    ```
 5. To delete the EKS clsuter 
    ```sh 
