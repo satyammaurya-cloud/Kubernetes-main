@@ -112,6 +112,7 @@ Scale down pods and watch nodes reduce (if below maxSize and above minSize):
 kubectl scale deployment nginx --replicas=1
 ```
 📝 Notes
+```sh
 minSize ensures at least 2 nodes are always running.
 
 maxSize sets the upper scaling limit.
