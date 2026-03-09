@@ -9,7 +9,7 @@ You can follow same procedure in the official  AWS document [Getting started wit
 1. Setup kubectl   
    a. Download kubectl version 1.20  
    b. Grant execution permissions to kubectl executable   
-   c. Move kubectl onto /usr/local/bin   
+   c. Move kubectl into /usr/local/bin   
    d. Test that your kubectl installation was successful    
    ```sh 
    curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
@@ -43,29 +43,28 @@ You can follow same procedure in the official  AWS document [Getting started wit
    --nodes-min 2 \
    --nodes-max 2 \ 
    --zones <AZ-1>,<AZ-2>
-   
+  
    example:
-   eksctl create cluster --name naresh \
-      --region us-east-1 \
+   eksctl create cluster --name my-eks-cluster \
+   --region us-east-1 \
    --node-type t2.small \
-
+   
  ```sh
-   eksctl create cluster --name naresh  \
+   eksctl create cluster --name my-eks  \
    --region us-east-1 \
    --node-type t2.medium \
    --nodes-min 2 \
-   --nodes-max 6
+   --nodes-max 4
    ```
 5. To delete the EKS clsuter 
    ```sh 
-   eksctl delete cluster naresh --region ap-south-1
+   eksctl delete cluster my-eks-cluster --region us-east-1
    ```
    
 6. Validate your cluster using by creating by checking nodes and by creating a pod 
    ```sh 
    kubectl get nodes
    ```
-
 
 
 ------- Docker and Minikube install process-----
