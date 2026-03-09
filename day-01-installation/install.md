@@ -43,7 +43,7 @@ You can follow same procedure in the official  AWS document [Getting started wit
    --nodes-min 2 \
    --nodes-max 2 \ 
    --zones <AZ-1>,<AZ-2>
-   ```
+  
    example:
    eksctl create cluster --name my-eks-cluster \
    --region us-east-1 \
@@ -65,7 +65,6 @@ You can follow same procedure in the official  AWS document [Getting started wit
    ```sh 
    kubectl get nodes
    ```
-
 
 
 ------- Docker and Minikube install process-----
