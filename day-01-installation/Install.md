@@ -49,28 +49,27 @@ You can follow same procedure in the official  AWS document [Getting started wit
 
 4. Create your cluster and nodes 
    ```sh
+   Example: 1
+   eksctl create cluster --name my-eks-cluster \
+   --region us-east-1 \
+   --node-type t2.small \
+   
+   Example: 2
+   If You Want Better Naming, you can give the name to nodegroup.(Recommended)
+   eksctl create cluster --name dev-cluster \
+   --region us-east-1 \
+   --nodegroup-name dev-workers \
+   --node-type t2.small
+   ---
+
+   Creation Template :
    eksctl create cluster --name cluster-name  \
    --region region-name \
    --node-type instance-type \
    --nodes-min 2 \
    --nodes-max 2 \ 
    --zones <AZ-1>,<AZ-2>
-  
-   example:
-   eksctl create cluster --name my-eks-cluster \
-   --region us-east-1 \
-   --node-type t2.small \
-
-   If You Want Better Naming (Recommended)
-   You can name the nodegroup.
-  
-   eksctl create cluster \
-   --name dev-cluster \
-   --region us-east-1 \
-   --nodegroup-name dev-workers \
-   --node-type t2.small
-    ```
- ```sh
+   Example:
    eksctl create cluster --name my-eks  \
    --region us-east-1 \
    --node-type t2.medium \
@@ -87,11 +86,13 @@ You can follow same procedure in the official  AWS document [Getting started wit
    kubectl get nodes
    ```
 
+---
+### ------- Docker and Minikube install process-----
 
-------- Docker and Minikube install process-----
-
-choose instance t2.medium    --2cpu 2gb ram required 
-sudo dnf install docker -y   -----Install Docker first
+### choose instance t2.medium    -> 2cpu 2gb ram required 
+-----Install Docker first
+  ```sh 
+sudo dnf install docker -y   
 
 sudo systemctl start docker.service ---to start thr docker service
 
@@ -99,22 +100,26 @@ sudo systemctl enable docker.service  --- to enable docker
 
 sudo usermod -a -G docker ec2-user  --- to add the user ec2-user to the docker group 
 
-newgrp docker --to run new group make changes immediatly  
+newgrp docker --to run new group make changes immediatly
 
+  ```
  
- ------Minikube ------
-
+ ### ------Minikube ------
+  ```sh 
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 to start minikube ---minikube start 
 to check status ----minikube status 
+  ```
 
-
-----------kubectl-----------
+### ----------kubectl-----------
+  ```sh 
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 
 chmod +x ./kubectl  -----Make the kubectl binary executable
 
 sudo mv ./kubectl /usr/local/bin/kubectl  ----sudo mv ./kubectl /usr/local/bin/kubectl
+
+  ```
