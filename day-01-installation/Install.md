@@ -25,7 +25,6 @@ You can follow same procedure in the official  AWS document [Getting started wit
    kubectl version --client
    ---
    kubectl auth whoami
-   kubectl auth can-i get pods
 
 
    ```
