@@ -58,7 +58,7 @@ kubectl edit cm aws-auth -n kube-system
 ```
 Add the user mapping:
 ```yaml
-mapUsers:
+mapUsers: |
 - userarn: arn:aws:iam::123456789012:user/developer-user-1
   username: developer-user
   groups:
