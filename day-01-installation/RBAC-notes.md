@@ -82,6 +82,7 @@ This updates: ~/.kube/config
 Verify Identity:
 ```bash
 kubectl auth whoami
+kubectl auth can-i get pods
 
 Output similar to:
 
