@@ -37,31 +37,24 @@ After mapping, RBAC permissions can be assigned.
 
 # RBAC Process in EKS
 
-## Step 1
+### Step 1
 Create an IAM user with EKS access.
 
-## Step 2
+### Step 2
 Configure AWS CLI profile.
-
 ```bash
-aws configure --profile iam-user
+aws configure --profile <iam-user-1>
 ```
-
 Provide:
-
-- AccessKey
-- SecretKey
-- Region
-
+- AccessKey, SecretKey and Region
 ---
-
-## Step 3
+### Step 3
 Create a Kubernetes Role
 
-## Step 4
+### Step 4
 Create a RoleBinding to bind the role to a group
 
-## Step 5
+### Step 5
 Add the IAM user ARN to the aws-auth ConfigMap
 
 ---
