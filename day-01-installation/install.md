@@ -48,7 +48,16 @@ You can follow same procedure in the official  AWS document [Getting started wit
    eksctl create cluster --name my-eks-cluster \
    --region us-east-1 \
    --node-type t2.small \
-   
+
+   If You Want Better Naming (Recommended)
+   You can name the nodegroup.
+  
+   eksctl create cluster \
+   --name dev-cluster \
+   --region us-east-1 \
+   --nodegroup-name dev-workers \
+   --node-type t2.small
+    ```
  ```sh
    eksctl create cluster --name my-eks  \
    --region us-east-1 \
