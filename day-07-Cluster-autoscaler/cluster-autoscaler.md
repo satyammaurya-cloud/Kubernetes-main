@@ -25,12 +25,11 @@ cluster-autoscaler-6889f6cf54-7pcsh   1/1     Running   0          2m
 3️⃣ Edit Deployment (Add Cluster Name)
 
 Edit the deployment to configure your cluster name:
-
+```sh
 kubectl -n kube-system edit deployment.apps/cluster-autoscaler
-Inside the manifest, find the container args section and update:
+```
+Inside the manifest, find the container args section and update: Copy and Paste yaml code thier
 
-yaml
-Copy code
 ```sh
 containers:
   - name: cluster-autoscaler
