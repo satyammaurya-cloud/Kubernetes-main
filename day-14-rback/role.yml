@@ -7,7 +7,7 @@ rules:
   - apiGroups: [""] # "" indicates the core API group ["apps"]
     resources: ["ConfigMap"]
     verbs: ["get", "list"]
-  - apiGroups: [""] # "" indicates the core API group ["apps"]
+  - apiGroups: [""] # 
     resources: ["pods"]
     verbs: ["get", "list",]
   - apiGroups: ["apps"]
