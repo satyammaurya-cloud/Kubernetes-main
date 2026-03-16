@@ -161,3 +161,17 @@ EKS Access
 | sts:AssumeRole policy | Allows users to assume role |
 | aws-auth ConfigMap | AWS → Kubernetes authentication |
 | RBAC | Kubernetes authorization |
+
+Is AWS root account me dev-group ke andar jitne users hain sirf wahi dev-role assume kar sakte hain, group ke bahar ke users is role ko use nahi kar sakte.
+EKS me normally access flow hota hai:
+```bash
+IAM User
+   ↓
+IAM Group
+   ↓
+Assume Role
+   ↓
+aws-auth mapping
+   ↓
+Kubernetes RBAC
+```
