@@ -25,7 +25,7 @@ verbs: ["get","list"]
 # Example: 2
 rules:
 - apiGroups: [""]
-  resources: ["configmaps","pods","persistentvolumes"]
+  resources: ["configmaps","pods","services"]
   verbs: ["get","list"]
 
 ```
