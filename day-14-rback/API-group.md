@@ -6,7 +6,7 @@
 #### 1️⃣ Core API Group:  **apiGroup: " "** :  This is the default (core) group.
 
 Common resources: 
-```
+```yaml
 pods
 services
 configmaps
@@ -16,10 +16,18 @@ nodes
 persistentvolumes
 persistentvolumeclaims
 
-# Example:
+# Example:1
 
 apiGroups: [""]
 resources: ["pods"]
+verbs: ["get","list"]
+---
+# Example: 2
+rules:
+- apiGroups: [""]
+  resources: ["configmaps","pods","persistentvolumes"]
+  verbs: ["get","list"]
+
 ```
 
 #### 2️⃣ Named API Groups:  These are separate API groups created by Kubernetes.
@@ -37,9 +45,10 @@ Examples:
 | storage.k8s.io | storageclasses |
 
 Example:
-```
-apiGroups: ["apps"]
-resources: ["deployments"]
+```yaml
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get","list"]
 ```
 
 # Kubernetes RBAC Verbs
