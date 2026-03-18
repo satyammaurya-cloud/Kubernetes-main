@@ -1,27 +1,21 @@
 ---------------------------------------------- RBAC process ----------------------------------------------------------
 
-Step-1 Need to create IAM user with EKS cluster permission 
+### Step-1 Need to create IAM user with EKS cluster permission 
 
-
-
-Step-2 aws configure --profile IAMuser
+### Step-2 aws configure --profile IAM user
 
  (AccessKey) 
-
  (SecretKey)
 
+### Step-3 Create kuberenetes Role 
+
+### step-4 Cretae kuberentes role binding to bind role and group
+
+### step-5 Add user arn into config map file
 
 
-step-3 create kuberenetes Role 
-
-step-4 cretae kuberentes role binding to bind role and group
-
-step-5 add usr arn into config map file
-
-
-# Role
-==============================================================
-
+## Role
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -37,11 +31,10 @@ rules:
   - apiGroups: ["apps"]
     resources: ["deployments"]
     verbs: ["get", "list"]
+```
 
-
-
-# Role Binding to map role and group
-==========================================
+## Role Binding to map role and group
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -55,41 +48,38 @@ roleRef:
   kind: Role
   name: developer-role
   apiGroup: rbac.authorization.k8s.io
+```
 
+#edit command and add below user details
 
+``` kubectl edit cm aws-auth -n kube-system ```
 
-
-
-#edit command and add belwow user details
-
-#kubectl edit cm aws-auth -n kube-system
-
-#aws auth config
-===============================================
+#### aws auth config
+```yaml
 mapUsers: |
    - userarn: arn:aws:iam::483216680875:user/devops
      username: devops
      groups:
      - developer
-
-=========================================================
-
-
+```
+```bin
 kubectl get rb 
 kubectl get rolebinding
 kubectl api-resources
+```
 
-# to add user into aws-auth file 
-kubectl edit cm aws-auth -n kube-system
+#### to add user into aws-auth file 
+```kubectl edit cm aws-auth -n kube-system```
 
-kubectl get cm -n kube-system
-# Please edit the object below. Lines beginning with a '#' will be ignored,
-# and an empty file will abort the edit. If an error occurs while saving this file will be
-# reopened with the relevant failures.
-#
+```kubectl get cm -n kube-system ```
 
+- Please edit the object below. Lines beginning with a '#' will be ignored,
+- and an empty file will abort the edit. If an error occurs while saving this file will be
+- reopened with the relevant failures.
+
+---
 ----for example below reference ------
-
+```yaml
 apiVersion: v1
 data:
   mapRoles: |
@@ -110,13 +100,9 @@ metadata:
   namespace: kube-system
   resourceVersion: "344678"
   uid: 8167447c-eb81-4108-8653-690369d98c4f
-
-
-
-
+```
+---
 After edit the file run below command to update cluster for created  user
-
 aws eks update-kubeconfig --name test --profile devops  #user 
-
 aws eks update-kubeconfig --name naresh  #for defulat one 
 
