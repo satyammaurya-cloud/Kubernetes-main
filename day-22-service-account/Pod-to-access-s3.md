@@ -1,47 +1,25 @@
 # Kubernetes EKS – Service Account + IRSA (Pod → S3 Access)
 
-## Overview
-This lab demonstrates how a **Kubernetes Pod in Amazon EKS** can securely access **AWS S3** using **IAM Roles for Service Accounts (IRSA)** instead of giving permissions to the entire worker node.
+How a **Kubernetes Pod in Amazon EKS** can securely access **AWS S3** using **IAM Roles for Service Accounts (IRSA)** instead of giving permissions to the entire worker node.
 
-Using IRSA improves security because **only the specific pod gets AWS permission**, not every pod on the node.
 
----
-
-# Architecture Flow
-
-```
-IAM Policy
-     ↓
-IAM Role (IRSA)
-     ↓
-ServiceAccount
-     ↓
-Pod
-     ↓
-S3 Access
-```
-
----
-
-# Step 1 — Enable OIDC Provider for EKS
-
-Enable the OIDC identity provider for your EKS cluster.
+### Step 1 — Enable OIDC Provider for EKS
 
 ```bash
 eksctl utils associate-iam-oidc-provider --cluster project-eks --region us-east-1 --approve
 ```
 
-**Remark:**  This allows pods inside the EKS cluster to access AWS services using IAM roles.
+**Remark:**  OIDC identity provider allows pods inside the cluster to access AWS services using IAM roles.
 
-Creating **Open ID Connect** to connect node inside resource (pod) to outside eks cluster aws resources if node group IAM role and Access/Secrest key permission is there or not.
+Creating **Open ID Connect** to connect node inside resource to outside the cluster aws resources if node group IAM role and Access/Secret key permission is there or not.
 
 ---
 
-# Step 2 — Create JSON Permission File for S3 Access
+### Step 2 — Create JSON Permission File for S3 Access
 
 Create a JSON file for S3 access.
 
-### File: `s3-access-policy.json`
+#### File: `s3-access-policy.json`
 
 ```json
 {
@@ -77,7 +55,7 @@ arn:aws:iam::ACCOUNT-ID:policy/EKS_S3_Access_Policy
 
 ---
 
-# Step 3 — Create IAM Role + Kubernetes Service Account (IRSA)
+### Step 3 — Create IAM Role + Kubernetes Service Account (IRSA)
 
 Create the IAM role and service account together using `eksctl`.
 
@@ -90,7 +68,7 @@ eksctl create iamserviceaccount \
 --approve
 ```
 
-### What this command does automatically
+#### What this command does automatically
 
 - Creates an **IAM Role**
 - Attaches the **S3 policy**
@@ -104,16 +82,15 @@ annotations:
   eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT-ID:role/S3AccessRole
 ```
 
-**Remark:**  
-Links **AWS IAM Role with Kubernetes Service Account**.
+**Remark:**  Links **AWS IAM Role with Kubernetes Service Account**.
 
 ---
 
-# Step 4 — Create Pod Using Service Account
+### Step 4 — Create Pod Using Service Account
 
 Create a file named:
 
-### File: `aws-cli-pod.yaml`
+#### File: `aws-cli-pod.yaml`
 
 ```yaml
 apiVersion: v1
@@ -135,23 +112,21 @@ Apply the pod:
 kubectl apply -f aws-cli-pod.yaml
 ```
 
-**Remark:**  
-The pod will **inherit IAM permissions through the ServiceAccount**.
+**Remark:**  The pod will **inherit IAM permissions through the ServiceAccount**.
 
 ---
 
-# Step 5 — Login into the Pod
+### Step 5 — Login into the Pod
 
 ```bash
 kubectl exec -it aws-cli-pod -- /bin/bash
 ```
 
-**Remark:**  
-Access the pod shell to run AWS CLI commands.
+**Remark:**  Access the pod shell to run AWS CLI commands.
 
 ---
 
-# Step 6 — Install AWS CLI Inside the Pod
+### Step 6 — Install AWS CLI Inside the Pod
 
 ```bash
 yum install -y unzip curl
@@ -173,7 +148,7 @@ aws --version
 
 ---
 
-# Step 7 — Test S3 Access
+#### Step 7 — Test S3 Access
 
 Run the following command inside the pod:
 
@@ -193,7 +168,7 @@ Example output:
 
 ---
 
-# Debug Command (Very Important)
+### Debug Command (Very Important)
 
 If S3 access fails, verify the IAM role used by the pod.
 
@@ -215,7 +190,7 @@ Example output:
 
 ---
 
-# Key Takeaway
+### Key Takeaway
 
 Instead of giving AWS permissions to the **node IAM role**, we use **IRSA** to give permission to a **specific pod**.
 
@@ -226,7 +201,22 @@ ServiceAccount + IRSA → Only Required Pod Gets Permission ✅
 
 ---
 
-# Memory Trick
+### Architecture Flow
+
+```
+IAM Policy
+     ↓
+IAM Role (IRSA)
+     ↓
+ServiceAccount
+     ↓
+Pod
+     ↓
+S3 Access
+```
+
+---
+### Memory Trick
 
 ```
 1️⃣ Enable OIDC – Allow EKS to trust IAM.
