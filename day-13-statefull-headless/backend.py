@@ -19,7 +19,7 @@ clusterip_db.close()
 # -------------------------------
 # Connect via Headless Service
 # -------------------------------
-# For StatefulSet Pod 1
+# For StatefulSet Pod 1 for reader like get api request
 headless_db_1 = mysql.connector.connect(
     host="mysql-1.mysql.default.svc.cluster.local",  # Headless service
     user="root",
@@ -33,7 +33,7 @@ cursor.execute("SELECT @@hostname;")
 print("Headless service Pod 1:", cursor.fetchone()[0])
 headless_db_1.close()
 
-# For StatefulSet Pod 0
+# For StatefulSet Pod 0 for writer like post, update api request
 headless_db_0 = mysql.connector.connect(
     host="mysql-0.mysql.default.svc.cluster.local",  # Headless service
     user="root",
