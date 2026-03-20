@@ -82,4 +82,5 @@ nslookup mysql-2.mysql.default.svc.cluster.local
 Pod DNS:
 ```yaml
 <pod>.<headless-svc>.<ns>.svc.cluster.local
+"mysql-0.mysql.default.svc.cluster.local"
 ```
