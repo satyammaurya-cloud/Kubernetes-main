@@ -12,10 +12,10 @@ spec:
     image: busybox
     command: ["sleep", "3600"]
 ```
- Apply Pod
+- Apply Pod
 ```kubectl apply -f pod.yml```
 
-Login into Pod ```kubectl exec -it dns-client -- sh```
+- Login into Pod ```kubectl exec -it dns-client -- sh```
 
 #### Step-2: Test Service DNS
 
@@ -55,11 +55,14 @@ nslookup <headless-service-name>
 nslookup mysql-0.mysql.default.svc.cluster.local
 nslookup mysql-1.mysql.default.svc.cluster.local
 nslookup mysql-2.mysql.default.svc.cluster.local
-```
+
 
 ✅ Result:
-Resolves to specific pod IP
-Direct communication to that pod
+- Resolves to specific pod IP
+- Direct communication to that pod
+```
+
+---
 
 #### Key Difference (Important for Interview 🔥)
 
@@ -70,13 +73,11 @@ Direct communication to that pod
 | Routing        | Random Pod       | Specific Pod                |
 | Use Case       | Normal apps      | Stateful apps (DB, Kafka)   |
 
----
 
 #### Super Short Revision (⚡)
 
-ClusterIP → One IP → Load balanced → Any pod
-
-Headless → No IP → Direct pod access → Stateful apps
+- ClusterIP → One IP → Load balanced → Any pod
+- Headless → No IP → Direct pod access → Stateful apps
 
 Pod DNS:
 ```yaml
