@@ -25,9 +25,8 @@ You can follow same procedure in the official  AWS document [Getting started wit
    kubectl version --client
    ---
    kubectl auth whoami
-
-
    ```
+   
 2. Setup eksctl   
    a. Download and extract the latest release   
    b. Move the extracted binary to /usr/local/bin   
