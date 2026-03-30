@@ -1,4 +1,36 @@
-# Cluster Autoscaler Setup on Amazon EKS 🚀 
+### 🔹 Cluster Autoscaler ?
+
+Cluster Autoscaler is a Kubernetes component that automatically adjusts the number of nodes in a cluster based on pending pods and resource utilization.
+
+### 🔹 Amazon EKS ?
+
+Amazon EKS is a managed Kubernetes service by AWS that simplifies running Kubernetes clusters without managing control plane infrastructure.
+
+### 🔹 Why Cluster Autoscaler in EKS ?
+
+Cluster Autoscaler in EKS automatically scales EC2 worker nodes up or down to ensure pods are scheduled efficiently and cost is optimized.
+
+### 🔹 How It Works ?
+
+Cluster Autoscaler monitors unscheduled pods and node utilization, and interacts with AWS Auto Scaling Groups to add or remove nodes accordingly.
+
+### 🔹 Workflow
+
+`Pod pending → Autoscaler checks → Node added → Pod scheduled → Low usage → Node removed`
+
+### 🔹 Prerequisites (Definition Style)
+
+> EKS Cluster: Running Kubernetes cluster
+
+> Worker Nodes: Managed/Unmanaged node group
+
+> IAM Role: Required permissions for scaling
+
+> kubectl: Configured access
+
+---
+
+## Cluster Autoscaler Setup on Amazon EKS 🚀 
 
 This guide walks you through installing and configuring the **Cluster Autoscaler** on an Amazon EKS cluster using the AWS cloud provider.
 
@@ -16,7 +48,7 @@ Check that the autoscaler pod is running in the kube-system namespace:
 ```sh
 kubectl -n kube-system get pods -l app=cluster-autoscaler
 ```
-Expected output:
+> Expected output:
 ```sh
 NAME                                  READY   STATUS    RESTARTS   AGE
 cluster-autoscaler-6889f6cf54-7pcsh   1/1     Running   0          2m
