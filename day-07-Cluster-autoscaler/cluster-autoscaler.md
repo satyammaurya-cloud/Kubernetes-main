@@ -144,13 +144,13 @@ Scale down pods and watch nodes reduce (if below maxSize and above minSize):
 kubectl scale deployment nginx --replicas=1
 ```
 #### 📝 Notes
-```sh
-minSize ensures at least 2 nodes are always running.
+> Auto Scaling Configuration
 
-maxSize sets the upper scaling limit.
+- **minSize**: ensures at least 2 nodes are always running.
+- **maxSize**: sets the upper scaling limit.
+- **desiredSize**: is the starting point but will be adjusted dynamically.
 
-desiredSize is the starting point but will be adjusted dynamically.
+## Important Notes
 
-Ensure your Node Group IAM Role has autoscaling permissions, otherwise the pod will stay in Pending or fail to scale.
-
-Only one Cluster Autoscaler pod should be running per cluster (it uses leader election).
+- Ensure your Node Group IAM Role has autoscaling permissions; otherwise, the pod will stay in Pending or fail to scale.
+- Only one Cluster Autoscaler pod should be running per cluster (it uses leader election).
