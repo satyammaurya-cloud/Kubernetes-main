@@ -1,8 +1,8 @@
-# 🚀 Cluster Autoscaler Setup on Amazon EKS
+## Cluster Autoscaler Setup on Amazon EKS 🚀 
 
 This guide walks you through installing and configuring the **Cluster Autoscaler** on an Amazon EKS cluster using the AWS cloud provider.
 
----
+
 
 ## 1️⃣ Deploy Cluster Autoscaler
 
