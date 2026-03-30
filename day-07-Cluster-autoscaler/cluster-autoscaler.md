@@ -1,17 +1,17 @@
-## Cluster Autoscaler Setup on Amazon EKS 🚀 
+# Cluster Autoscaler Setup on Amazon EKS 🚀 
 
 This guide walks you through installing and configuring the **Cluster Autoscaler** on an Amazon EKS cluster using the AWS cloud provider.
 
 
 
-## 1️⃣ Deploy Cluster Autoscaler
+#### 1️⃣ Deploy Cluster Autoscaler
 
 Apply the official Cluster Autoscaler manifest for your Kubernetes version (adjust `1.29.0` if needed):
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/cluster-autoscaler-1.29.0/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
 ```
-2️⃣ Verify the Pod
+#### 2️⃣ Verify the Pod
 Check that the autoscaler pod is running in the kube-system namespace:
 ```sh
 kubectl -n kube-system get pods -l app=cluster-autoscaler
@@ -22,7 +22,7 @@ NAME                                  READY   STATUS    RESTARTS   AGE
 cluster-autoscaler-6889f6cf54-7pcsh   1/1     Running   0          2m
 ```
 
-3️⃣ Edit Deployment (Add Cluster Name)
+#### 3️⃣ Edit Deployment (Add Cluster Name)
 
 Edit the deployment to configure your cluster name:
 ```sh
@@ -47,7 +47,7 @@ containers:
 ```
 Save & exit.
 
-4️⃣ Configure IAM Permissions
+#### 4️⃣ Configure IAM Permissions
 Cluster Autoscaler requires IAM permissions to scale nodes.
 Go to your EKS Node Group IAM Role and attach the following policy.
 
@@ -79,7 +79,7 @@ Example IAM Policy JSON
 
 Attach this to your Node Group Role.
 
-5️⃣ Update Node Group Scaling Config
+#### 5️⃣ Update Node Group Scaling Config
 Set your min/max/desired node counts for the autoscaler:
 ```sh
 aws eks update-nodegroup-config \
@@ -87,7 +87,7 @@ aws eks update-nodegroup-config \
   --nodegroup-name ng-af5ac006 \
   --scaling-config minSize=2,maxSize=6,desiredSize=3
 ```
-6️⃣ Check Autoscaler Logs
+#### 6️⃣ Check Autoscaler Logs
 Watch the logs to confirm the autoscaler is working:
 ```sh
 kubectl -n kube-system logs -f deployment/cluster-autoscaler
@@ -97,7 +97,7 @@ Look for lines like:
 I0828 17:36:38.403432       1 scale_up.go:422] Pod default/nginx-deployment-12345 is unschedulable ...
 I0828 17:36:38.403451       1 scale_up.go:423] Scale-up triggered ...
 ```
-✅ Validation
+#### ✅ Validation
 Deploy a test workload with more pods than your current node capacity:
 ```sh
 kubectl create deployment nginx --image=nginx --replicas=50
@@ -110,7 +110,7 @@ Scale down pods and watch nodes reduce (if below maxSize and above minSize):
 ```sh
 kubectl scale deployment nginx --replicas=1
 ```
-📝 Notes
+#### 📝 Notes
 ```sh
 minSize ensures at least 2 nodes are always running.
 
