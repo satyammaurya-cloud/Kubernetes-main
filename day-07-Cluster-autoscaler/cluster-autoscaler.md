@@ -40,7 +40,8 @@ containers:
         - --cloud-provider=aws
         - --skip-nodes-with-local-storage=false
         - --expander=least-waste
-        - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/naresh ###chnage the cluster name in place of naresh my cluster name is naresh
+        - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/naresh  # Update your cluster name here 
+# changed the cluster name in place of <Your cluster name> as my cluster name is naresh
         image: registry.k8s.io/autoscaling/cluster-autoscaler:v1.26.2
         imagePullPolicy: Always
         name: cluster-autoscaler
