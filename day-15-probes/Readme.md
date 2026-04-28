@@ -7,6 +7,23 @@ Kubernetes ko kaise pata chalega ki aapka container sahi se chal raha hai? Use p
 
 ## Teen Tarah ke Probes
 Bas ye scenario yaad rakho:
+---
+# Notes on Probes
+
+**Startup Probe:**
+- "School Admission" jaisa.
+- Ye sirf ek baar chalta hai (jab tak success na mil jaye).
+- Ek baar pass ho gaya, toh ye mar jata hai (stop ho jata hai).
+
+**Readiness Probe:**
+- "Traffic Signal" jaisa.
+- Jab tak container zinda hai, ye hamesha chalta rehta hai (traffic rokne/bhejne ke liye).
+
+**Liveness Probe:**
+- "Bodyguard" jaisa.
+- Jab tak container zinda hai, ye hamesha chalta rehta hai (restart karne ke liye).
+
+---
 
 ### 1. Liveness Probe (Zinda hai ya mar gaya?)
 - **Kaam:** Ye check karta hai ki container chal raha hai ya "hang" ho gaya hai.
