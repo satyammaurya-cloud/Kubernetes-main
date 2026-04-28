@@ -2,6 +2,9 @@
 
 This repository contains documentation for setting up a production-ready monitoring stack on Amazon EKS using Helm, Grafana for visualization, and PagerDuty for incident response.
 
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/0dbf77bb-7eeb-4efb-ac61-1defcd8fabef" />
+
+
 ## 📌 Overview
 - **Prometheus:** Collects and stores metrics as time-series data via HTTP pull.
 - **Grafana:** Visualizes metrics through customizable dashboards.
