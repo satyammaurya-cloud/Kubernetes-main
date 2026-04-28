@@ -54,8 +54,7 @@ Prometheus is a popular choice for Kubernetes monitoring for several reasons:
 ## Prometheus Architecture
 
 <br></br>
-![Alt text](https://prometheus.io/assets/architecture.png)
-
+<img width="1351" height="811" alt="image" src="https://github.com/user-attachments/assets/e83561c4-6419-4ab1-be35-2a041037049a" />
 <br></br>
 
 ## What is Grafana ?
