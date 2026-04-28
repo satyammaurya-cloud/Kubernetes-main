@@ -117,7 +117,8 @@ To access the UIs from a browser, change the service type to `LoadBalancer`.
 
 ### 2. In Grafana (Connect PagerDuty)
 - **Add Contact Point:** Go to `Alerting > Contact Point`. Select **PagerDuty** and paste your Integration Key.
-- **Create Alert Rule:** 
+- **Create Alert Rule:**
+  - Go to Alerting > Alert Rules. -> + Create Alert Rule.
   - **Metric:** `100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)`
   - **Threshold:** Set condition to `Above 90`.
   - **Notification:** Assign the PagerDuty Contact Point.
