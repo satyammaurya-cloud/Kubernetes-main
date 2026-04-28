@@ -6,9 +6,6 @@ Bhai, tension mat le, probes thoda confusing ho sakte hain kyunki ye "doctor" ki
 Kubernetes ko kaise pata chalega ki aapka container sahi se chal raha hai? Use probe chahiye.
 
 ## Teen Tarah ke Probes
-Bas ye scenario yaad rakho:
----
-# Notes on Probes
 
 **Startup Probe:**
 - "School Admission" jaisa.
